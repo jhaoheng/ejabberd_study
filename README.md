@@ -1,10 +1,8 @@
 # readme
 
-20161013
-
 ## install
 
-- [osx](http://gitlab.orbweb.com/max.hu/xmpp-ejabberd/wikis/installosx) : 請參考 wiki
+- osx: 請參考 wiki
 
 ## 模組的使用
 
@@ -20,8 +18,8 @@
 
 - ex : check user resource
     - 指令 `ejabberdctl user_resources [user_name] [vhost]`
-	   - `user_name` : 非 name@vhost，只是單純的 name， ex : 1728@xmpp-stg.orbweb.me，取出 `1728`
-	   - `vhost` : 為 vhost 的全名，ex : `xmpp-stg.orbweb.me`
+	   - `user_name` : 非 name@{vhost}，只是單純的 name， ex : 1728@{vhost}，取出 `1728`
+	   - `vhost` : 為 vhost 的全名，請參考 admin-console 中的 vhost 部分
 
 ## nodejs plugins
 
