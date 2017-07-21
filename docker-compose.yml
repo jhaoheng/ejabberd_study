@@ -1,0 +1,48 @@
+version: "3.1"
+services:
+  ejabberd:
+    build: .
+    user: root
+    ports:
+      - 5222 # Client 2 Server
+      - 5269 # Server 2 Server
+      - 5280 # HTTP admin/websocket/http-bind
+      - 4369 # cluster
+    # environment:
+    #   - setDns=localhost
+    environment:
+      - XMPP_DOMAIN=localhost # 要更換為正式環境的 domain
+      - ERLANG_NODE=ejabberd
+      - EJABBERD_ADMINS=admin@localhost
+      - TZ=Asia/Taipei
+      - ERLANG_COOKIE=testCluster
+      - SKIP_MODULES_UPDATE=true
+      - EJABBERD_CLUSTER=true
+      - EJABBERD_AUTH_METHOD=external # mysql use
+      - AUTH_MYSQL_HOST=
+      - AUTH_MYSQL_USER=
+      - AUTH_MYSQL_PASSWORD=
+      - AUTH_MYSQL_DATABASE=
+      # - AUTH_MYSQL_HASHALG=
+      - EJABBERD_SKIP_MODULES_UPDATE=false
+
+      # 0: No ejabberd log at all (not recommended)
+      # 1: Critical
+      # 2: Error
+      # 3: Warning
+      # 4: Info
+      # 5: Debug
+      - EJABBERD_LOGLEVEL=5
+    domainname: localhost
+    volume:
+      - ./docker/opt/ejabberd/ssl:/opt/ejabberd/ssl
+      - ./docker/opt/ejabberd/backup:/opt/ejabberd/backup
+      - ./docker/opt/ejabberd/upload:/opt/ejabberd/upload
+      - ./docker/opt/ejabberd/database:/opt/ejabberd/database
+      # 要加入 config 設定檔
+      # - ./conf:/opt/ejabberd/conf
+    container_name: ejabberd
+    user: root
+    privileged: true
+    tty: true
+    restart: always
